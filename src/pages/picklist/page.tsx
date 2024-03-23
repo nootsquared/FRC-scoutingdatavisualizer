@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import raw_data from '../components/results.json';
+import raw_data from '../../app/components/results.json';
 import _ from "lodash";
 
 import { cn } from "../../lib/utils"

@@ -1,17 +1,17 @@
 'use client';
 
-import AutonConst from './components/all-teams/AutonConst';
-import TeleopConst from './components/all-teams/TeleopConstSpeaker';
-import TeleopConstAmp from './components/all-teams/TeleopConstAmp';
-import EndgameConst from './components/all-teams/EndgameConst';
-import AllTeamsTotal from './components/all-teams/AllTeamsTotal';
-import TeamAutons from './components/team-specific/teamAutons';
-import TeamTeleops from './components/team-specific/teamTeleops';
-import TeamAverages from './components/team-specific/teamAverages';
-import Graph from './components/team-specific/tableTeam';
+import AutonConst from './all-teams/AutonConst';
+import TeleopConst from './all-teams/TeleopConstSpeaker';
+import TeleopConstAmp from './all-teams/TeleopConstAmp';
+import EndgameConst from './all-teams/EndgameConst';
+import AllTeamsTotal from './all-teams/AllTeamsTotal';
+import TeamAutons from '../components/team-specific/teamAutons';
+import TeamTeleops from '../components/team-specific/teamTeleops';
+import TeamAverages from '../components/team-specific/teamAverages';
+import Graph from '../components/team-specific/tableTeam';
 import { Grid, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
-import TeamQuestions from './components/team-specific/teamQuestions';
+import TeamQuestions from '../components/team-specific/teamQuestions';
 import { IconLink } from '@tabler/icons-react';
 import Link from 'next/link';
 

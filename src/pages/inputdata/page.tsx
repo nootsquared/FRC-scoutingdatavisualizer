@@ -77,27 +77,49 @@ const Page: React.FC = () => {
     const [notes, setOtherNotes] = useState("");
 
     const handleFormSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-        const formData = {
-            scouter_name,
-            match_number,
-            teamA_number,
-            alliance,
-            starting_position: starting_position === '1' ? 'AMP' : starting_position === '2' ? 'Middle' : starting_position === '3' ? 'Source' : '',
-            additional_notes_location: additional_notes_location === '1' ? 'None' : additional_notes_location === '2' ? 'Spike' : additional_notes_location === '3' ? 'Center line' : additional_notes_location === '4' ? 'Both' : '',
-            amp_notes_auton,
-            speaker_notes_auton,
-            amp_notes_teleop,
-            speaker_notes_teleop,
-            trap: trap === '1' ? 'Yes' : trap === '2' ? 'No' : '',
-            harmonized: harmonized === '1' ? 'Yes' : harmonized === '2' ? 'No' : '',
-            hang_or_park: hang_or_park === '1' ? 'Hang' : hang_or_park === '2' ? 'Park' : hang_or_park === '3' ? 'None' : '',
-            robot_driving: robot_driving === '1' ? 'Poor' : robot_driving === '2' ? 'Mid' : robot_driving === '3' ? 'Excellent' : '',
-            defense_capability: defense_capability === '1' ? 'Did not play defense' : defense_capability === '2' ? 'Average' : defense_capability === '3' ? 'Excellent' : '',
-            notes
-        }; 
+        const [formData, setFormData] = useState({});
 
-        console.log(JSON.stringify(formData, null, 2));
+        useEffect(() => {
+            setFormData({
+                scouter_name,
+                match_number,
+                teamA_number,
+                alliance,
+                starting_position: starting_position === '1' ? 'AMP' : starting_position === '2' ? 'Middle' : starting_position === '3' ? 'Source' : '',
+                additional_notes_location: additional_notes_location === '1' ? 'None' : additional_notes_location === '2' ? 'Spike' : additional_notes_location === '3' ? 'Center line' : additional_notes_location === '4' ? 'Both' : '',
+                amp_notes_auton,
+                speaker_notes_auton,
+                amp_notes_teleop,
+                speaker_notes_teleop,
+                trap: trap === '1' ? 'Yes' : trap === '2' ? 'No' : '',
+                harmonized: harmonized === '1' ? 'Yes' : harmonized === '2' ? 'No' : '',
+                hang_or_park: hang_or_park === '1' ? 'Hang' : hang_or_park === '2' ? 'Park' : hang_or_park === '3' ? 'None' : '',
+                robot_driving: robot_driving === '1' ? 'Poor' : robot_driving === '2' ? 'Mid' : robot_driving === '3' ? 'Excellent' : '',
+                defense_capability: defense_capability === '1' ? 'Did not play defense' : defense_capability === '2' ? 'Average' : defense_capability === '3' ? 'Excellent' : '',
+                notes
+            });
+        }, [scouter_name, match_number, teamA_number, alliance, starting_position, additional_notes_location, amp_notes_auton, speaker_notes_auton, amp_notes_teleop, speaker_notes_teleop, trap, harmonized, hang_or_park, robot_driving, defense_capability, notes]);
+        
+        const handleFormSubmit = (event: React.FormEvent) => {
+            event.preventDefault();
+        
+            fetch('/api/saveData', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        
+            console.log(JSON.stringify(formData, null, 2));
+            handlePitClearClick();
+            handleMatchClearClick();
+        };
     };
 
     return (
